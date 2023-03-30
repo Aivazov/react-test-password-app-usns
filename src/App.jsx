@@ -88,9 +88,21 @@ function App() {
         ''
       )}
 
-      {(password && password.length >= 8 && checks.lettersCheck) ||
-      (password && password.length >= 8 && checks.numbersCheck) ||
-      (password && password.length >= 8 && checks.charsCheck) ? (
+      {(password &&
+        password.length >= 8 &&
+        checks.lettersCheck &&
+        !checks.charsCheck &&
+        !checks.numbersCheck) ||
+      (password &&
+        password.length >= 8 &&
+        checks.numbersCheck &&
+        !checks.charsCheck &&
+        !checks.numbersCheck) ||
+      (password &&
+        password.length >= 8 &&
+        checks.charsCheck &&
+        !checks.charsCheck &&
+        !checks.numbersCheck) ? (
         <div className="mt-5 flex flex-col space-y-3">
           <div className="w-[300px] red rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
             <span className="text-white uppercase">{checkStrength.easy}</span>
@@ -107,19 +119,19 @@ function App() {
       )}
 
       {/* {/*  */}
-      
+
       {(password &&
-        password.length &&
+        password.length >= 8 &&
         checks.lettersCheck &&
         checks.charsCheck &&
         !checks.numbersCheck) ||
       (password &&
-        password.length &&
+        password.length >= 8 &&
         checks.lettersCheck &&
         !checks.charsCheck &&
         checks.numbersCheck) ||
       (password &&
-        password.length &&
+        password.length >= 8 &&
         !checks.lettersCheck &&
         checks.charsCheck &&
         checks.numbersCheck) ? (
@@ -136,8 +148,8 @@ function App() {
         </div>
       ) : (
         ''
-      )} 
-      
+      )}
+
       {/* // */}
 
       {/* {password &&
@@ -201,7 +213,7 @@ function App() {
       )} */}
 
       {password &&
-      password.length &&
+      password.length >= 8 &&
       checks.lettersCheck &&
       checks.charsCheck &&
       checks.numbersCheck ? (
