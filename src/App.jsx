@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import CheckingBlocks from './components/CheckingBlocks';
-// import CheckingBlocksWrap from './components/CheckingBlocksWrap';
+import { checkStrength, styles } from './data';
 
 function App() {
   const [password, setPassword] = useState('');
@@ -12,21 +12,6 @@ function App() {
     passwordLengthCheck: false,
   });
 
-  const checkStrength = {
-    empty: 'No Symbols',
-    lackOf: 'Less then 8 symbols',
-    easy: 'easy',
-    medium: 'medium',
-    strong: 'strong',
-  };
-
-  const styles = {
-    lightGray: 'light-gray',
-    red: 'red',
-    yellow: 'yellow',
-    green: 'green',
-  };
-
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -36,9 +21,6 @@ function App() {
     const lettersCheck = /[a-zA-Z]/.test(value);
     const numbersCheck = /[0-9]/.test(value);
     const charsCheck = /[!@#$%^&*-]/.test(value);
-    // const lettersCheck = /[a-zA-Zа-яА-Я]/.test(value);
-    // const numbersCheck = /[0-9]/.test(value);
-    // const charsCheck = /[!@#$%^&*-№:?;%]/.test(value);
     const passwordLengthCheck = value.length >= 8;
     setChecks({
       lettersCheck,
@@ -70,7 +52,7 @@ function App() {
   const noMatchingLength = password && password.length < 8;
 
   return (
-    <div className="p-10">
+    <div className="flex flex-col justify-center items-center pt-10">
       <form>
         <label className="flex flex-col w-[300px] text-xl uppercase">
           Password:
