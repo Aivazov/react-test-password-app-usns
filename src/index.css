@@ -18,6 +18,10 @@
   .yellow {
     @apply bg-yellow-500;
   }
+
+  .green {
+    @apply bg-green-500;
+  }
 }
 
 body {
