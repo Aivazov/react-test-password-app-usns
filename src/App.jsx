@@ -118,8 +118,6 @@ function App() {
         ''
       )}
 
-      {/* {/*  */}
-
       {(password &&
         password.length >= 8 &&
         checks.lettersCheck &&
@@ -149,68 +147,6 @@ function App() {
       ) : (
         ''
       )}
-
-      {/* // */}
-
-      {/* {password &&
-      password.length &&
-      checks.lettersCheck &&
-      checks.charsCheck &&
-      !checks.numbersCheck ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] yellow rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] yellow text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>easy</span>
-          </div>
-        </div>
-      ) : (
-        ''
-      )} */}
-
-      {/* {password &&
-      password.length &&
-      checks.lettersCheck &&
-      !checks.charsCheck &&
-      checks.numbersCheck ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] yellow rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] yellow text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>easy</span>
-          </div>
-        </div>
-      ) : (
-        ''
-      )} */}
-
-      {/* {password &&
-      password.length &&
-      !checks.lettersCheck &&
-      checks.charsCheck &&
-      checks.numbersCheck ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] yellow rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] yellow text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>easy</span>
-          </div>
-        </div>
-      ) : (
-        ''
-      )} */}
 
       {password &&
       password.length >= 8 &&
