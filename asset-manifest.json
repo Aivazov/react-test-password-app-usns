@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-test-password-app-usns/static/css/main.841ba8c8.css",
+    "main.js": "/react-test-password-app-usns/static/js/main.c22903d4.js",
+    "index.html": "/react-test-password-app-usns/index.html",
+    "main.841ba8c8.css.map": "/react-test-password-app-usns/static/css/main.841ba8c8.css.map",
+    "main.c22903d4.js.map": "/react-test-password-app-usns/static/js/main.c22903d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.841ba8c8.css",
+    "static/js/main.c22903d4.js"
+  ]
+}
