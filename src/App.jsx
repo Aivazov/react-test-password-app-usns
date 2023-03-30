@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import CheckingBlocks from './components/CheckingBlocks';
+// import CheckingBlocksWrap from './components/CheckingBlocksWrap';
 
 function App() {
   const [password, setPassword] = useState('');
@@ -11,7 +12,20 @@ function App() {
     passwordLengthCheck: false,
   });
 
-  const checkStrength = { easy: 'easy', medium: 'medium', strong: 'strong' };
+  const checkStrength = {
+    empty: 'No Symbols',
+    lackOf: 'Less then 8 symbols',
+    easy: 'easy',
+    medium: 'medium',
+    strong: 'strong',
+  };
+
+  const styles = {
+    lightGray: 'light-gray',
+    red: 'red',
+    yellow: 'yellow',
+    green: 'green',
+  };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -19,9 +33,12 @@ function App() {
 
   const handleKeyUp = (e) => {
     const { value } = e.target;
-    const lettersCheck = /[a-zA-Zа-яА-Я]/.test(value);
+    const lettersCheck = /[a-zA-Z]/.test(value);
     const numbersCheck = /[0-9]/.test(value);
-    const charsCheck = /[!@#$%^&*-№:?;%]/.test(value);
+    const charsCheck = /[!@#$%^&*-]/.test(value);
+    // const lettersCheck = /[a-zA-Zа-яА-Я]/.test(value);
+    // const numbersCheck = /[0-9]/.test(value);
+    // const charsCheck = /[!@#$%^&*-№:?;%]/.test(value);
     const passwordLengthCheck = value.length >= 8;
     setChecks({
       lettersCheck,
@@ -33,10 +50,22 @@ function App() {
 
   const letters =
     checks.lettersCheck && !checks.charsCheck && !checks.numbersCheck;
+  const lettersNumbers =
+    checks.lettersCheck && !checks.charsCheck && checks.numbersCheck;
+
   const chars =
     !checks.lettersCheck && checks.charsCheck && !checks.numbersCheck;
+  const charsLetters =
+    checks.lettersCheck && checks.charsCheck && !checks.numbersCheck;
+
   const numbers =
     !checks.lettersCheck && !checks.charsCheck && checks.numbersCheck;
+  const charsNumbers =
+    !checks.lettersCheck && checks.charsCheck && checks.numbersCheck;
+
+  const lettersCharsNumbers =
+    checks.lettersCheck && checks.charsCheck && checks.numbersCheck;
+
   const matchingLength = password && password.length >= 8;
   const noMatchingLength = password && password.length < 8;
 
@@ -54,110 +83,83 @@ function App() {
         </label>
       </form>
 
+      {/* checking if no password */}
+
       {!password ? (
         <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] white text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>No symbols</span>
-          </div>
-          <div className="w-[300px] white text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>No symbols</span>
-          </div>
-          <div className="w-[300px] white text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>No symbols</span>
-          </div>
+          <CheckingBlocks
+            title={checkStrength.empty}
+            styles={styles.lightGray}
+          />
+          <CheckingBlocks
+            title={checkStrength.empty}
+            styles={styles.lightGray}
+          />
+          <CheckingBlocks
+            title={checkStrength.empty}
+            styles={styles.lightGray}
+          />
         </div>
       ) : (
         ''
       )}
+
+      {/* checking if less then given number of symbols */}
 
       {noMatchingLength ? (
         <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] red text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">Less then 8 symbols</span>
-          </div>
-          <div className="w-[300px] red text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">Less then 8 symbols</span>
-          </div>
-          <div className="w-[300px] red text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">Less then 8 symbols</span>
-          </div>
+          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
+          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
+          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
         </div>
       ) : (
         ''
       )}
 
-      {(matchingLength &&
-        !checks.lettersCheck &&
-        !checks.charsCheck &&
-        checks.numbersCheck) ||
-      (matchingLength &&
-        checks.lettersCheck &&
-        !checks.charsCheck &&
-        !checks.numbersCheck) ||
-      (matchingLength &&
-        checks.charsCheck &&
-        !checks.lettersCheck &&
-        !checks.numbersCheck) ? (
+      {/* checking if only one type of characters are typed */}
+
+      {(matchingLength && numbers) ||
+      (matchingLength && letters) ||
+      (matchingLength && chars) ? (
         <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] red rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.easy}</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>Test</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>Test</span>
-          </div>
+          <CheckingBlocks title={checkStrength.easy} styles={styles.red} />
+          <CheckingBlocks
+            title={checkStrength.easy}
+            styles={styles.lightGray}
+          />
+          <CheckingBlocks
+            title={checkStrength.easy}
+            styles={styles.lightGray}
+          />
         </div>
       ) : (
         ''
       )}
 
-      {(password &&
-        password.length >= 8 &&
-        checks.lettersCheck &&
-        checks.charsCheck &&
-        !checks.numbersCheck) ||
-      (password &&
-        password.length >= 8 &&
-        checks.lettersCheck &&
-        !checks.charsCheck &&
-        checks.numbersCheck) ||
-      (password &&
-        password.length >= 8 &&
-        !checks.lettersCheck &&
-        checks.charsCheck &&
-        checks.numbersCheck) ? (
+      {/* checking if two of three characters types are typed */}
+
+      {(matchingLength && charsLetters) ||
+      (matchingLength && lettersNumbers) ||
+      (matchingLength && charsNumbers) ? (
         <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] yellow rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] yellow text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">{checkStrength.medium}</span>
-          </div>
-          <div className="w-[300px] gray text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span>easy</span>
-          </div>
+          <CheckingBlocks title={checkStrength.medium} styles={styles.yellow} />
+          <CheckingBlocks title={checkStrength.medium} styles={styles.yellow} />
+          <CheckingBlocks
+            title={checkStrength.medium}
+            styles={styles.lightGray}
+          />
         </div>
       ) : (
         ''
       )}
 
-      {password &&
-      password.length >= 8 &&
-      checks.lettersCheck &&
-      checks.charsCheck &&
-      checks.numbersCheck ? (
+      {/* checking if all three types of characters were used */}
+
+      {matchingLength && lettersCharsNumbers ? (
         <div className="mt-5 flex flex-col space-y-3">
-          <div className="w-[300px] green rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 text-center py-1">
-            <span className="text-white uppercase">{checkStrength.strong}</span>
-          </div>
-          <div className="w-[300px] green text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">{checkStrength.strong}</span>
-          </div>
-          <div className="w-[300px] green text-center rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1">
-            <span className="text-white uppercase">{checkStrength.strong}</span>
-          </div>
+          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
+          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
+          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
         </div>
       ) : (
         ''
