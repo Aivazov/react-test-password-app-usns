@@ -19,9 +19,9 @@ function App() {
 
   const handleKeyUp = (e) => {
     const { value } = e.target;
-    const lettersCheck = /[a-zA-Z]/.test(value);
+    const lettersCheck = /[a-zA-Zа-яА-Я]/.test(value);
     const numbersCheck = /[0-9]/.test(value);
-    const charsCheck = /[!@#$%^&*-]/.test(value);
+    const charsCheck = /[!@#$%^&*-№:?;%]/.test(value);
     const passwordLengthCheck = value.length >= 8;
     setChecks({
       lettersCheck,
@@ -86,18 +86,15 @@ function App() {
         ''
       )}
 
-      {(password &&
-        password.length >= 8 &&
+      {(matchingLength &&
         !checks.lettersCheck &&
         !checks.charsCheck &&
         checks.numbersCheck) ||
-      (password &&
-        password.length >= 8 &&
+      (matchingLength &&
         checks.lettersCheck &&
         !checks.charsCheck &&
         !checks.numbersCheck) ||
-      (password &&
-        password.length >= 8 &&
+      (matchingLength &&
         checks.charsCheck &&
         !checks.lettersCheck &&
         !checks.numbersCheck) ? (
