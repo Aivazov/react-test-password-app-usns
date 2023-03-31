@@ -12,19 +12,23 @@
   }
 
   .red {
-    @apply bg-red-600;
+    @apply bg-gradient-to-l from-[#d70c0c] to-[#fa5c5c];
   }
 
   .yellow {
-    @apply bg-yellow-500;
+    @apply bg-gradient-to-l from-[#f4c61d] to-[#ffec18];
   }
 
   .green {
-    @apply bg-green-500;
+    @apply bg-gradient-to-l from-[#69d545] to-[#37821e];
+  }
+
+  .filter {
+    @apply invert;
   }
 
   .checking-box {
-    @apply w-[300px] text-center text-white uppercase rounded-lg cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 py-1;
+    @apply w-[300px] text-center text-white uppercase rounded-lg cursor-pointer hover:scale-105  hover:opacity-75 transition-all ease-in-out duration-200 py-1;
   }
 }
 
@@ -40,4 +44,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.filter {
+  /* filter: revert; */
+  /* filter: hue-rotate(90deg); */
+  /* filter: drop-shadow(16px 16px 20px rgb(0, 0, 0)); */
+  filter: invert(75%);
+  /* filter: blur(5px); */
 }

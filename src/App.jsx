@@ -1,7 +1,8 @@
 import './App.css';
 import { useState } from 'react';
 import CheckingBlocks from './components/CheckingBlocks';
-import { checkStrength, styles } from './data';
+import { motion } from 'framer-motion';
+import { checkStrength, color } from './data';
 
 function App() {
   const [password, setPassword] = useState('');
@@ -67,85 +68,168 @@ function App() {
 
       {/* checking if no password */}
 
-      {!password ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <CheckingBlocks
-            title={checkStrength.empty}
-            styles={styles.lightGray}
-          />
-          <CheckingBlocks
-            title={checkStrength.empty}
-            styles={styles.lightGray}
-          />
-          <CheckingBlocks
-            title={checkStrength.empty}
-            styles={styles.lightGray}
-          />
-        </div>
-      ) : (
-        ''
-      )}
+      <div>
+        {!password ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mt-5 flex flex-col space-y-3 opacity-100 transition-all ease-in duration-500"
+          >
+            <CheckingBlocks
+              title={checkStrength.empty}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.empty}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.empty}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+          </motion.div>
+        ) : (
+          ''
+        )}
 
-      {/* checking if less then given number of symbols */}
+        {/* checking if less then given number of symbols */}
 
-      {noMatchingLength ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
-          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
-          <CheckingBlocks title={checkStrength.lackOf} styles={styles.red} />
-        </div>
-      ) : (
-        ''
-      )}
+        {noMatchingLength ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mt-5 flex flex-col space-y-3 opacity-100 transition-all ease-in duration-500"
+          >
+            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
+            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
+            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
+          </motion.div>
+        ) : (
+          ''
+        )}
 
-      {/* checking if only one type of characters are typed */}
+        {/* checking if only one type of characters are typed */}
 
-      {(matchingLength && numbers) ||
-      (matchingLength && letters) ||
-      (matchingLength && chars) ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <CheckingBlocks title={checkStrength.easy} styles={styles.red} />
-          <CheckingBlocks
-            title={checkStrength.easy}
-            styles={styles.lightGray}
-          />
-          <CheckingBlocks
-            title={checkStrength.easy}
-            styles={styles.lightGray}
-          />
-        </div>
-      ) : (
-        ''
-      )}
+        {(matchingLength && numbers) ||
+        (matchingLength && letters) ||
+        (matchingLength && chars) ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mt-5 flex flex-col space-y-3"
+          >
+            <CheckingBlocks title={checkStrength.easy} color={color.red} />
+            <CheckingBlocks
+              title={checkStrength.medium}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.strong}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+          </motion.div>
+        ) : (
+          ''
+        )}
 
-      {/* checking if two of three characters types are typed */}
+        {/* checking if two of three characters types are typed */}
 
-      {(matchingLength && charsLetters) ||
-      (matchingLength && lettersNumbers) ||
-      (matchingLength && charsNumbers) ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <CheckingBlocks title={checkStrength.medium} styles={styles.yellow} />
-          <CheckingBlocks title={checkStrength.medium} styles={styles.yellow} />
-          <CheckingBlocks
-            title={checkStrength.medium}
-            styles={styles.lightGray}
-          />
-        </div>
-      ) : (
-        ''
-      )}
+        {(matchingLength && charsLetters) ||
+        (matchingLength && lettersNumbers) ||
+        (matchingLength && charsNumbers) ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mt-5 flex flex-col space-y-3"
+          >
+            <CheckingBlocks
+              title={checkStrength.medium}
+              color={color.yellow}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.medium}
+              color={color.yellow}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.strong}
+              color={color.lightGray}
+              filter={color.filter}
+            />
+          </motion.div>
+        ) : (
+          ''
+        )}
 
-      {/* checking if all three types of characters were used */}
+        {/* checking if all three types of characters were used */}
 
-      {matchingLength && lettersCharsNumbers ? (
-        <div className="mt-5 flex flex-col space-y-3">
-          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
-          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
-          <CheckingBlocks title={checkStrength.strong} styles={styles.green} />
-        </div>
-      ) : (
-        ''
-      )}
+        {matchingLength && lettersCharsNumbers ? (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mt-5 flex flex-col space-y-3"
+          >
+            <CheckingBlocks
+              title={checkStrength.strong}
+              color={color.green}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.strong}
+              color={color.green}
+              filter={color.filter}
+            />
+            <CheckingBlocks
+              title={checkStrength.strong}
+              color={color.green}
+              filter={color.filter}
+            />
+          </motion.div>
+        ) : (
+          ''
+        )}
+      </div>
     </div>
   );
 }

@@ -6,11 +6,13 @@ export const checkStrength = {
   strong: 'strong',
 };
 
-export const styles = {
+export const color = {
   lightGray: 'light-gray',
   red: 'red',
   yellow: 'yellow',
   green: 'green',
+  noOpacity: 'no-opacity',
+  filter: 'invert',
 };
 
 // const lettersCheck = /[a-zA-Zа-яА-Я]/.test(value);
