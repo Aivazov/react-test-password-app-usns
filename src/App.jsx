@@ -31,6 +31,8 @@ function App() {
     });
   };
 
+  // checks
+
   const letters =
     checks.lettersCheck && !checks.charsCheck && !checks.numbersCheck;
   const lettersNumbers =
@@ -68,7 +70,7 @@ function App() {
 
       {/* checking if no password */}
 
-      <div>
+      <div className='overflow-hidden px-20'>
         {!password ? (
           <motion.div
             initial={{
@@ -80,7 +82,7 @@ function App() {
             transition={{
               duration: 0.5,
             }}
-            className="mt-5 flex flex-col space-y-3 opacity-100 transition-all ease-in duration-500"
+            className="mt-5 flex flex-col space-y-3"
           >
             <CheckingBlocks
               title={checkStrength.empty}
@@ -107,15 +109,22 @@ function App() {
         {noMatchingLength ? (
           <motion.div
             initial={{
+              x: -100,
               opacity: 0,
             }}
             animate={{
               opacity: 1,
+              x: 0,
             }}
             transition={{
               duration: 0.5,
+              // ease: 'linear',
+              // duration: 2,
+              // x: { duration: 1 },
+              type: 'spring',
+              stiffness: 100,
             }}
-            className="mt-5 flex flex-col space-y-3 opacity-100 transition-all ease-in duration-500"
+            className="mt-5 flex flex-col space-y-3"
           >
             <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
             <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
