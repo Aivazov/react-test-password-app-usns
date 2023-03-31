@@ -6,12 +6,18 @@ import { checkStrength, color } from './data';
 
 function App() {
   const [password, setPassword] = useState('');
+  const [type, setType] = useState('password');
   const [checks, setChecks] = useState({
     lettersCheck: false,
     numbersCheck: false,
     charsCheck: false,
     passwordLengthCheck: false,
   });
+
+  const handleShowClick = (e) => {
+    e.preventDefault();
+    setType(type === 'password' ? 'text' : 'password');
+  };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -57,20 +63,23 @@ function App() {
   return (
     <div className="flex flex-col justify-center items-center pt-10">
       <form>
-        <label className="flex flex-col w-[300px] text-xl uppercase">
+        <label className="flex flex-col w-[300px] text-xl uppercase relative">
           Password:
           <input
-            type="text"
+            type={type}
             onChange={handlePassword}
             onKeyUp={handleKeyUp}
             className="border-b border-gray-600 outline-none mt-5 text-gray-800 pb-2"
           />
+          <button className="absolute right-0 top-10" onClick={handleShowClick}>
+            {type === 'password' ? 'Show' : 'Hide'}
+          </button>
         </label>
       </form>
 
       {/* checking if no password */}
 
-      <div className='overflow-hidden px-20'>
+      <div className="overflow-hidden px-20">
         {!password ? (
           <motion.div
             initial={{
