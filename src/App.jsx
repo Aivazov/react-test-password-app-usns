@@ -69,9 +69,12 @@ function App() {
             type={type}
             onChange={handlePassword}
             onKeyUp={handleKeyUp}
-            className="border-b border-gray-600 outline-none mt-5 text-gray-800 pb-2"
+            className="border-b border-gray-600 outline-none mt-5 text-gray-800 pb-2 pr-[70px]"
           />
-          <button className="absolute right-0 top-10" onClick={handleShowClick}>
+          <button
+            className="absolute right-1 top-[42px] bg-gray-300 hover:scale-105 transition-all ease-in-out duration-200 rounded-lg py-1 px-2 text-center"
+            onClick={handleShowClick}
+          >
             {type === 'password' ? 'Show' : 'Hide'}
           </button>
         </label>
