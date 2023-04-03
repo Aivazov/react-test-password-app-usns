@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-test-password-app-usns/static/css/main.46d80d51.css",
-    "main.js": "/react-test-password-app-usns/static/js/main.f6fca8a4.js",
+    "main.css": "/react-test-password-app-usns/static/css/main.27e180fe.css",
+    "main.js": "/react-test-password-app-usns/static/js/main.42c718af.js",
     "index.html": "/react-test-password-app-usns/index.html",
-    "main.46d80d51.css.map": "/react-test-password-app-usns/static/css/main.46d80d51.css.map",
-    "main.f6fca8a4.js.map": "/react-test-password-app-usns/static/js/main.f6fca8a4.js.map"
+    "main.27e180fe.css.map": "/react-test-password-app-usns/static/css/main.27e180fe.css.map",
+    "main.42c718af.js.map": "/react-test-password-app-usns/static/js/main.42c718af.js.map"
   },
   "entrypoints": [
-    "static/css/main.46d80d51.css",
-    "static/js/main.f6fca8a4.js"
+    "static/css/main.27e180fe.css",
+    "static/js/main.42c718af.js"
   ]
 }
