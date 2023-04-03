@@ -3,7 +3,7 @@ import CheckingBlocks from '../components/CheckingBlocks';
 import { checkStrength, color } from '../data';
 import Searchbox from '../components/Searchbox/Searchbox';
 
-export default function PasswordCheck({}) {
+export default function PasswordCheck() {
   const [password, setPassword] = useState('');
   const [type, setType] = useState('password');
   const [checks, setChecks] = useState({
@@ -145,21 +145,13 @@ export default function PasswordCheck({}) {
 
         {matchingLength && lettersCharsNumbers ? (
           <div className="checks__wrap">
-            <CheckingBlocks
-              title={checkStrength.strong}
-              color={color.green}
-              filter={color.filter}
-            />
-            <CheckingBlocks
-              title={checkStrength.strong}
-              color={color.green}
-              filter={color.filter}
-            />
-            <CheckingBlocks
-              title={checkStrength.strong}
-              color={color.green}
-              filter={color.filter}
-            />
+            {[...new Array(3)].map(() => (
+              <CheckingBlocks
+                title={checkStrength.strong}
+                color={color.green}
+                filter={color.filter}
+              />
+            ))}
           </div>
         ) : (
           ''
