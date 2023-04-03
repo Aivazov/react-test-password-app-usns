@@ -1,8 +1,8 @@
 import './App.css';
 import { useState } from 'react';
 import CheckingBlocks from './components/CheckingBlocks';
-import { motion } from 'framer-motion';
 import { checkStrength, color } from './data';
+import Searchbox from './components/Searchbox/Searchbox';
 
 function App() {
   const [password, setPassword] = useState('');
@@ -37,7 +37,7 @@ function App() {
     });
   };
 
-  // checks
+  // reducing checks
 
   const letters =
     checks.lettersCheck && !checks.charsCheck && !checks.numbersCheck;
@@ -62,56 +62,26 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center items-center pt-10">
-      <form>
-        <label className="flex flex-col w-[300px] text-xl uppercase relative">
-          Password:
-          <input
-            type={type}
-            onChange={handlePassword}
-            onKeyUp={handleKeyUp}
-            className="border-b border-gray-600 outline-none mt-5 text-gray-800 pb-2 pr-[70px]"
-          />
-          <button
-            className="absolute right-1 top-[42px] bg-gray-300 hover:scale-105 transition-all ease-in-out duration-200 rounded-lg py-1 px-2 text-center"
-            onClick={handleShowClick}
-          >
-            {type === 'password' ? 'Show' : 'Hide'}
-          </button>
-        </label>
-      </form>
+      <Searchbox
+        keyUp={handleKeyUp}
+        change={handlePassword}
+        type={type}
+        showBtnClick={handleShowClick}
+      />
 
       {/* checking if no password */}
 
       <div className="overflow-hidden px-20">
         {!password ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="mt-5 flex flex-col space-y-3"
-          >
-            <CheckingBlocks
-              title={checkStrength.empty}
-              color={color.lightGray}
-              filter={color.filter}
-            />
-            <CheckingBlocks
-              title={checkStrength.empty}
-              color={color.lightGray}
-              filter={color.filter}
-            />
-            <CheckingBlocks
-              title={checkStrength.empty}
-              color={color.lightGray}
-              filter={color.filter}
-            />
-          </motion.div>
+          <div className="mt-5 flex flex-col space-y-3">
+            {[...new Array(3)].map(() => (
+              <CheckingBlocks
+                title={checkStrength.empty}
+                color={color.lightGray}
+                filter={color.filter}
+              />
+            ))}
+          </div>
         ) : (
           ''
         )}
@@ -119,29 +89,11 @@ function App() {
         {/* checking if less then given number of symbols */}
 
         {noMatchingLength ? (
-          <motion.div
-            initial={{
-              x: -100,
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              duration: 0.5,
-              // ease: 'linear',
-              // duration: 2,
-              // x: { duration: 1 },
-              type: 'spring',
-              stiffness: 100,
-            }}
-            className="mt-5 flex flex-col space-y-3"
-          >
-            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
-            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
-            <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
-          </motion.div>
+          <div className="mt-5 flex flex-col space-y-3">
+            {[...new Array(3)].map(() => (
+              <CheckingBlocks title={checkStrength.lackOf} color={color.red} />
+            ))}
+          </div>
         ) : (
           ''
         )}
@@ -151,18 +103,7 @@ function App() {
         {(matchingLength && numbers) ||
         (matchingLength && letters) ||
         (matchingLength && chars) ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="mt-5 flex flex-col space-y-3"
-          >
+          <div className="mt-5 flex flex-col space-y-3">
             <CheckingBlocks title={checkStrength.easy} color={color.red} />
             <CheckingBlocks
               title={checkStrength.medium}
@@ -174,7 +115,7 @@ function App() {
               color={color.lightGray}
               filter={color.filter}
             />
-          </motion.div>
+          </div>
         ) : (
           ''
         )}
@@ -184,18 +125,7 @@ function App() {
         {(matchingLength && charsLetters) ||
         (matchingLength && lettersNumbers) ||
         (matchingLength && charsNumbers) ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="mt-5 flex flex-col space-y-3"
-          >
+          <div className="mt-5 flex flex-col space-y-3">
             <CheckingBlocks
               title={checkStrength.medium}
               color={color.yellow}
@@ -211,7 +141,7 @@ function App() {
               color={color.lightGray}
               filter={color.filter}
             />
-          </motion.div>
+          </div>
         ) : (
           ''
         )}
@@ -219,18 +149,7 @@ function App() {
         {/* checking if all three types of characters were used */}
 
         {matchingLength && lettersCharsNumbers ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="mt-5 flex flex-col space-y-3"
-          >
+          <div className="mt-5 flex flex-col space-y-3">
             <CheckingBlocks
               title={checkStrength.strong}
               color={color.green}
@@ -246,7 +165,7 @@ function App() {
               color={color.green}
               filter={color.filter}
             />
-          </motion.div>
+          </div>
         ) : (
           ''
         )}
